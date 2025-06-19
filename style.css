@@ -1,0 +1,42 @@
+#playground{
+    width: 600px;
+    height: 600px;
+    border: 5px black solid;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(20, 30px);
+    grid-template-rows: repeat(20, 30px);
+    position: relative;
+}
+
+.case {
+    background-color: #ddd;
+    border: 1px solid #aaa;
+    width: 30px;
+    height: 30px;
+    box-sizing: border-box;
+}
+
+#square{
+  width: 30px;
+  height: 30px;
+  background-color: blue;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 50px;
+}
+
+.destructible {
+    background-color: #cc9435 !important; 
+  }
+  
+  .invulnerable {
+    background-color: #3a2e1aac; /* rouge foncé */
+  }
+
+  .bombe {
+    transition: all 0.2s;
+    box-shadow: 0 0 10px 3px red;
+    background-color: #000;
+  }
