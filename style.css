@@ -28,10 +28,10 @@
 }
 
 .destructible {
-    background-color: #cc9435 !important; 
+    background-color: #cc9435; 
   }
   
-  .invulnerable {
+.invulnerable {
     background-color: #3a2e1aac; /* rouge foncé */
   }
 
@@ -40,3 +40,58 @@
     box-shadow: 0 0 10px 3px red;
     background-color: #000;
   }
+
+  h1{
+    text-align: center;
+  }
+
+.normalcase{
+  background-color: #ddd;
+}
+  
+.ennemi {
+  background-color: red;
+  border-radius: 50%;
+}
+
+#message{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%, -50%);
+  font-size: 32px; 
+  color: yellow; 
+  text-shadow: 2px 2px 4px black; 
+  display: none; 
+  z-index: 10;
+  background-color: #aaa;
+  padding: 75px 150px;
+  border-radius: 5px;
+  border: darksalmon 3px solid;
+}
+
+@keyframes explosion {
+  0% {
+    transform: scale(0.5);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+.explosion-effect {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background: radial-gradient(circle, orange 30%, red 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: explosion 0.5s ease-out forwards;
+  z-index: 3;
+}
