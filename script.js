@@ -431,46 +431,45 @@ setTimeout(() => {
       }
     }
 
-    function deplacerEnnemis() {
-      ennemis.forEach(ennemi => {
-        const directions = [
-          { dx: 0, dy: -1 }, // haut
-          { dx: 0, dy: 1 },  // bas
-          { dx: -1, dy: 0 }, // gauche
-          { dx: 1, dy: 0 }   // droite
-        ];
-    
-        const dir = directions[Math.floor(Math.random() * directions.length)];
-        const newRow = ennemi.row + dir.dy;
-        const newCol = ennemi.col + dir.dx;
-        const index = newRow * size + newCol;
-    
-        const isInBounds = newRow >= 0 && newRow < size && newCol >= 0 && newCol < size;
-        const isFreeCell = gridArray[index] === 0;
-        const isNotOnPlayer = !(newRow === squareRow && newCol === squareCol);
-        const isNotOnOtherEnemy = !ennemis.some(e => e !== ennemi && e.row === newRow && e.col === newCol);
-    
-        if (isInBounds && isFreeCell && isNotOnOtherEnemy) {
-          // Appliquer le déplacement
-          ennemi.row = newRow;
-          ennemi.col = newCol;
-          ennemi.element.style.top = `${newRow * 30}px`;
-          ennemi.element.style.left = `${newCol * 30}px`;
-        
-          // 🔥 Vérifier si contact avec le joueur quand <= 3 ennemis
-          if (ennemis.length <= 3 && newRow === squareRow && newCol === squareCol) {
-            messageDiv.textContent = " Défaite !";
-        messageDiv.style.display = 'block';
-        setTimeout(() => {
-          messageDiv.style.display = 'none';
-          restartGame(); // 🔄 redémarre le jeu
-        }, 1000); // relancer le jeu après une petite pause
-          }
-        }
-        
-        }
-      );
+
+// Déplacement ennemis avec blocage sur joueur et défaite si collision quand <= 3 ennemis
+function deplacerEnnemis() {
+  ennemis.forEach(ennemi => {
+    const directions = [
+      { dx: 0, dy: -1 }, // haut
+      { dx: 0, dy: 1 },  // bas
+      { dx: -1, dy: 0 }, // gauche
+      { dx: 1, dy: 0 }   // droite
+    ];
+
+    const dir = directions[Math.floor(Math.random() * directions.length)];
+    const newRow = ennemi.row + dir.dy;
+    const newCol = ennemi.col + dir.dx;
+    const index = newRow * size + newCol;
+
+    const isInBounds = newRow >= 0 && newRow < size && newCol >= 0 && newCol < size;
+    const isFreeCell = gridArray[index] === 0;
+    const isNotOnPlayer = !(newRow === squareRow && newCol === squareCol);
+    const isNotOnOtherEnemy = !ennemis.some(e => e !== ennemi && e.row === newRow && e.col === newCol);
+
+    if (isInBounds && isFreeCell && isNotOnOtherEnemy && isNotOnPlayer) {
+      // Déplacement autorisé
+      ennemi.row = newRow;
+      ennemi.col = newCol;
+      ennemi.element.style.top = `${newRow * 30}px`;
+      ennemi.element.style.left = `${newCol * 30}px`;
+    } else if (ennemis.length <= 3 && newRow === squareRow && newCol === squareCol) {
+      // Défaite si ennemi touche joueur (quand <= 3 ennemis)
+      const messageDiv = document.getElementById('message');
+      messageDiv.textContent = "Défaite !";
+      messageDiv.style.display = 'block';
+      setTimeout(() => {
+        messageDiv.style.display = 'none';
+        restartGame();
+      }, 1500);
     }
+  });
+}
     
     setInterval(deplacerEnnemis, 1000); // déplacement toutes les secondes
 
