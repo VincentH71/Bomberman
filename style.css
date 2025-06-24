@@ -20,7 +20,8 @@
 #square{
   width: 30px;
   height: 30px;
-  background: url('images/image-removebg-preview.png');
+  background: url('images/hq720-removebg-preview.png') center;
+  background-size: cover;
   position: absolute;
   top: 0;
   left: 0;
@@ -36,8 +37,9 @@
 
   .bombe {
     transition: all 0.2s;
-    box-shadow: 0 0 10px 3px red;
-    background-color: #000;
+    background: url('images/img-removebg-preview.png') center;
+    background-size: cover;
+    background-color: transparent;
   }
 
   h1{
@@ -49,8 +51,10 @@
 }
   
 .ennemi {
-  background-color: red;
+  background: url('images/GettyImages-2215750594.jpg-removebg-preview.png') center;
+  background-size: cover;
   border-radius: 50%;
+  background-color: transparent;
 }
 
 #message{
